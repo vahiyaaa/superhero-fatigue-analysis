@@ -66,6 +66,7 @@ for franchise_name, keyword_id in franchise_keywords.items():
                                 "Vote Count": details.get("vote_count"),
                                 "Popularity": details.get("popularity"),
                                 "Year": year,
+                                "IMDb ID": details.get("imdb_id"),
                             }
                             all_movies_data.append(movie_metrics)
         else:
@@ -82,6 +83,8 @@ df = df.drop_duplicates(subset=["Title"])
 df["Net Profit"] = df["Revenue"] - df["Budget"]
 df["ROI Multiplier"] = round(df["Revenue"] / df["Budget"], 2)
 df = df.sort_values(by="Year")
+
+df = df.reset_index(drop=True)
 
 # Export to CSV
 df.to_csv("superhero_fatigue_data.csv", index=False)
